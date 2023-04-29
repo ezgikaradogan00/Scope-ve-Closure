@@ -23,6 +23,7 @@ console.log('örnek görev:', ilkiniDon(['as','sa'],function(metin){return metin
 // Başlangıç Challenge'ı Sonu
 
 
+
 ///// M V P ///////
 
 /*Görev 1: macSkoru()
@@ -30,10 +31,16 @@ console.log('örnek görev:', ilkiniDon(['as','sa'],function(metin){return metin
   Aşağıdaki skor1 ve skor2 kodlarını inceleyiniz ve aşağıdaki soruları altına not alarak cevaplayın
   
   1. skor1 ve skor2 arasındaki fark nedir?
+   Skor 1, nested function olarak tanımlanmıtır. Variable fonksiyon içerisinde tanımlandığından dışarıdan erişime olanak tanımlamaz(skorGuncelle fonksiyonuna erişim sağlanmadan skoru güncellemek mümkün değildir.) Skor 2 global bir variable değerine sahiptir.
   
   2. Hangisi bir closure kullanmaktadır? Nasıl tarif edebilirsin? (yarınki derste öğreneceksin :) )
+
+  Skor 1 closure kullanmaktadır. 
   
   3. Hangi durumda skor1 tercih edilebilir? Hangi durumda skor2 daha mantıklıdır?
+
+  Skor 1 , kodların daha güvenilir bir ortamda barındırılması hedefleniyorsa, dışarıdan bir müdahale ile değiştirilmesine olanak tanımamak adına tercih edilebilir.
+  Skor 2 , daha genel kapsamlı bir fonksiyon olarak tanımlanmıştır. Bu tür fonksiyonlar, kodların tekrar kullanımına erişim sağlanmak istenen projelerde tercih edilebilir.
 */
 
 // skor1 kodları
@@ -64,11 +71,12 @@ Aşağıdaki takimSkoru() fonksiyonununda aşağıdakileri yapınız:
 Not: Bu fonskiyon, aşağıdaki diğer görevler için de bir callback fonksiyonu olarak da kullanılacak
 */
 
-function takimSkoru(/*Kodunuzu buraya yazınız*/){
-    /*Kodunuzu buraya yazınız*/
+function takimSkoru() {
+  let skor = Math.floor(Math.random() * (25 - 10 + 1)) + 10;
+  return skor;
 }
 
-
+console.log("görev 2 ",takimSkoru(skor));
 
 
 /* Görev 3: macSonucu() 
@@ -86,10 +94,20 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
 }
 */ 
 
-function macSonucu(/*Kodunuzu buraya yazınız*/){
-  /*Kodunuzu buraya yazınız*/
+function macSonucu(callback, ceyrekSayisi) {
+  let evSahibi = 0;
+  let konukTakim = 0;
+  for (let ceyrek = 1; ceyrek <= ceyrekSayisi; ceyrek++) {
+    evSahibi +=  callback(); 
+    konukTakim += callback();
+  }
+  let finalSkor = {};
+  finalSkor.EvSahibi = evSahibi;
+  finalSkor.KonukTakim = konukTakim;
+  return finalSkor;
 }
 
+console.log("görev 3 ", macSonucu(takimSkoru, 4));
 
 
 
@@ -109,11 +127,20 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
   */
 
 
-function periyotSkoru(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
+function periyotSkoru(callback) {
+  let skor = {
+    EvSahibi: 0,
+    KonukTakim: 0,
+  }
 
+  for(let taraf in skor) {
+   
+  }
+
+  return skor;
 }
 
+console.log("görev 4 ",periyotSkoru(takimSkoru()));
 
 /* Zorlayıcı Görev 5: skorTabelasi() 
 Aşağıdaki skorTabelasi() fonksiyonunu kullanarak aşağıdakileri yapınız:
